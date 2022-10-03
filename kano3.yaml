@@ -1,0 +1,27 @@
+name: Kanojo x Kanojo x Kanojo
+game_slug: kano3
+version: Windows (CD)
+slug: kano3
+runner: wine
+
+script:
+  game:
+    exe: "drive_c/Program Files/ωstar/彼女×彼女×彼女　～三姉妹とのドキドキ共同生活～/kano3.exe"
+    prefix: $GAMEDIR
+    arch: win32
+  installer:
+  - task:
+      name: create_prefix
+  - insert-disc:
+      requires: kano3.exe
+  - task:
+      executable: $DISC/setup.exe
+      name: wineexec
+      return_code: "512"
+  system:
+    env:
+      LC_ALL: "ja_JP.UTF-8"
+      TZ: "Asia/Tokyo"
+  wine:
+    arch: win32
+    prefix: $GAMEDIR
